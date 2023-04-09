@@ -25,3 +25,12 @@ services:
     command: --port 3307
     links:
       - go
+  react:
+    build:
+      dockerfile: ./docker/react/Dockerfile
+    volumes:
+      - ./front:/usr/src/app
+    command: sh -c "cd todoapp && npm start"
+    ports:
+      - "3000:3000"
+    stdin_open: true
