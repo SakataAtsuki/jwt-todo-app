@@ -11,8 +11,11 @@ const TodoList = () => {
     const handleChangeTodo = (event) => {
         setTodo(event.target.value);
     }
-    const getTodosData = async() => {
-        await axios.get("http://localhost:8080/todo/api/v1/todos")
+
+    const getTodosData = async () => {
+        await axios.get("http://localhost:8080/todo/api/v1/todos", {
+            headers: { 'Authorization': `Bearer ${localStorage.getItem('jwt')}` }
+        })
             .then((res) => {
                 setTodos(res.data);
             }).catch((err) => {
@@ -27,11 +30,12 @@ const TodoList = () => {
     const handleCreateTodo = async () => {
         const params = new URLSearchParams;
         params.append("title", todo);
-        await axios.post("http://localhost:8080/todo/api/v1/todos", params)
-            .then(() => {
-                getTodosData();
-                setTodo('');
-            })
+        await axios.post("http://localhost:8080/todo/api/v1/todos", params, {
+            headers: { 'Authorization': `Bearer ${localStorage.getItem('jwt')}` }
+        }).then(() => {
+            getTodosData();
+            setTodo('');
+        })
             .catch((err) => {
                 console.error(err);
             });
@@ -39,10 +43,11 @@ const TodoList = () => {
     }
 
     const handleDeleteTodo = async (id) => {
-        await axios.delete(`http://localhost:8080/todo/api/v1/todos/${id}`)
-            .then(() => {
-                getTodosData();
-            })
+        await axios.delete(`http://localhost:8080/todo/api/v1/todos/${id}`, {
+            headers: { 'Authorization': `Bearer ${localStorage.getItem('jwt')}`}
+        }).then(() => {
+            getTodosData();
+        })
             .catch((err) => {
                 console.error(err);
             });
@@ -60,9 +65,9 @@ const TodoList = () => {
                     size='small'
                     onChange={handleChangeTodo}
                 />
-                <Button variant="contained" endIcon={<AddIcon />} onClick={ handleCreateTodo }>CREATE</Button>
+                <Button variant="contained" endIcon={<AddIcon />} onClick={handleCreateTodo}>CREATE</Button>
             </Grid>
-            <TodoItem {...todos} onClick={ handleDeleteTodo } />
+            <TodoItem {...todos} onClick={handleDeleteTodo} />
         </>
     );
 }

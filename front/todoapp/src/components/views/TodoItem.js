@@ -25,7 +25,7 @@ const TodoItem = (props) => {
                             <ListItem key={index}>
                                 <WorkIcon sx={{ p: 2 }} />
                                 <ListItemText primary={todo.title} />
-                                <Button onClick={() => props.onClick(todo.id)} endIcon={<DeleteIcon />}>Delete</Button>
+                                <Button onClick={() => props.onClick(todo.id)} endIcon={<DeleteIcon />}>DELETE</Button>
                             </ListItem>
                         )
                     })}

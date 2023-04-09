@@ -1,6 +1,8 @@
 import { Grid, Paper, Typography, TextField, Link, Button, Box } from '@mui/material';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { auth } from './firebase';
 
 const Signin = () => {
     const [email, setEmail] = useState('');
@@ -10,12 +12,26 @@ const Signin = () => {
     const handleChangeEmail = (event) => {
         setEmail(event.target.value);
     }
+
     const handleChangePassword = (event) => {
         setPassword(event.target.value);
     }
-    const handleSubmit = () => {
-        navigate('/');
-    }
+
+    const handleSubmit = async () => {
+        await signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                const user = userCredential.user;
+                user.getIdToken().then(idToken => {
+                    localStorage.setItem('jwt', idToken.toString());
+                });
+                console.log(localStorage.getItem('jwt'));
+                navigate("/");
+            })
+            .catch((err) => {
+                alert(err.message);
+                console.error(err);
+            });
+    };
 
     return (
         <Grid>
@@ -50,7 +66,7 @@ const Signin = () => {
                     </Button>
                     <Typography variant="caption">
                         アカウントを持っていませんか？
-                        <Link href="#">アカウント作成</Link>
+                        <Link href="/signup">アカウント作成</Link>
                     </Typography>
                 </Box>
             </Paper>
