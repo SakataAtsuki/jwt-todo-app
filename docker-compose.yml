@@ -9,6 +9,11 @@ services:
     ports:
       - 8080:8080
     tty: true
+    environment:
+      GOOGLE_CREDENTIALS_JSON: /key.json
+    volumes:
+      - ${GOOGLE_CREDENTIALS_JSON}:/key.json:ro
+      - ./api:/go/src/app
   mysql:
     build:
       context: .
