@@ -1,16 +1,33 @@
 package controller
 
 import (
-	"github.com/SakataAtsuki/jwt-todo-app/model"
-	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
 	"strconv"
 	"time"
+
+	"github.com/SakataAtsuki/jwt-todo-app/model"
+	"github.com/gin-contrib/cors"
+	"github.com/gin-gonic/gin"
 )
 
 func StartServer() {
 	r := gin.Default()
+
+	r.Use(cors.New(cors.Config{
+		AllowOrigins: []string{
+			"http://localhost:3000",
+		},
+		AllowMethods: []string{
+			"GET",
+			"POST",
+			"DELETE",
+			"PUT",
+		},
+		AllowHeaders: []string{
+			"Authorization",
+		},
+	}))
 
 	v1 := r.Group("todo/api/v1")
 	{
