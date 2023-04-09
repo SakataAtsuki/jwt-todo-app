@@ -1,6 +1,6 @@
-module jwt-todo-app
+module github.com/SakataAtsuki/jwt-todo-app
 
-go 1.19
+go 1.20
 
 require (
 	github.com/gin-gonic/gin v1.9.0

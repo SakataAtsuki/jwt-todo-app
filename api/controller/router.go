@@ -1,13 +1,12 @@
 package controller
 
 import (
-	"jwt-todo-app/api/model"
+	"github.com/SakataAtsuki/jwt-todo-app/api/model"
+	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
 	"strconv"
 	"time"
-
-	"github.com/gin-gonic/gin"
 )
 
 func StartServer() {
