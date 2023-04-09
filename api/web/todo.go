@@ -1,4 +1,4 @@
-package controller
+package web
 
 import (
 	"log"
@@ -7,29 +7,11 @@ import (
 	"time"
 
 	"github.com/SakataAtsuki/jwt-todo-app/model"
-	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
-func StartServer() {
-	e := gin.Default()
-
-	e.Use(cors.New(cors.Config{
-		AllowOrigins: []string{
-			"http://localhost:3000",
-		},
-		AllowMethods: []string{
-			"GET",
-			"POST",
-			"DELETE",
-			"PUT",
-		},
-		AllowHeaders: []string{
-			"Authorization",
-		},
-	}))
-
-	r := e.Group("todo/api/v1/todos")
+func useTodos(e *gin.RouterGroup) {
+	r := e.Group("/todos")
 
 	r.Use(authMiddleware())
 
@@ -82,6 +64,4 @@ func StartServer() {
 		}
 		c.JSON(http.StatusOK, "Deleted")
 	})
-
-	e.Run(":8080")
 }

@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/SakataAtsuki/jwt-todo-app/controller"
 	"github.com/SakataAtsuki/jwt-todo-app/model"
 	"github.com/SakataAtsuki/jwt-todo-app/util"
+	"github.com/SakataAtsuki/jwt-todo-app/web"
 )
 
 func init() {
@@ -12,5 +12,5 @@ func init() {
 }
 
 func main() {
-	controller.StartServer()
+	web.New()
 }
