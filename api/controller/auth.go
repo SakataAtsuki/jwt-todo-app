@@ -15,7 +15,6 @@ import (
 func authMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		opt := option.WithCredentialsFile(os.Getenv("GOOGLE_CREDENTIALS_JSON"))
-
 		app, err := firebase.NewApp(context.Background(), nil, opt)
 		if err != nil {
 			log.Printf("err: %v\n", err)
