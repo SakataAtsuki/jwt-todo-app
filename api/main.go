@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/SakataAtsuki/jwt-todo-app/api/controller"
-	"github.com/SakataAtsuki/jwt-todo-app/api/model"
+	"github.com/SakataAtsuki/jwt-todo-app/controller"
+	"github.com/SakataAtsuki/jwt-todo-app/model"
 )
 
 func init() {

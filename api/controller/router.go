@@ -1,7 +1,7 @@
 package controller
 
 import (
-	"github.com/SakataAtsuki/jwt-todo-app/api/model"
+	"github.com/SakataAtsuki/jwt-todo-app/model"
 	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
